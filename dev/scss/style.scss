@@ -1,0 +1,196 @@
+@import "../../node_modules/tailwindcss/base";
+@import "../../node_modules/tailwindcss/components";
+@import "../../node_modules/tailwindcss/utilities";
+@import "roots";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-transform: uppercase;
+}
+
+h1 {
+	@apply text-6xl;
+	color: var(--color-red);
+}
+
+h2 {
+	@apply text-5xl font-bold;
+}
+h3 {
+	@apply text-4xl font-bold;
+}
+h4 {
+	@apply text-3xl font-bold;
+}
+h5 {
+	@apply text-2xl font-bold;
+}
+
+.bg-light {
+	background-color: var(--color-light-gray);
+}
+
+// Header
+header {
+	position: relative;
+	z-index: 6;
+}
+.nav {
+	li {
+		@apply transition-colors duration-150 ease-in-out;
+		&:hover {
+			color: var(--color-red);
+		}
+	}
+}
+
+.logo {
+	background-color: #c4132f;
+	@apply pr-8 pl-16 py-2;
+}
+
+// Hero
+.hero {
+	background: url("../images/hero.jpg");
+	background-size: cover;
+	height: 780px;
+	clip-path: polygon(50% 100%, 100% 90%, 100% 0, 0 0, 0 90%);
+	z-index: 5;
+	position: relative;
+}
+
+// Grid Layout
+section.grid {
+	// img {
+	// 	apply h-full;
+	// }
+	position: relative;
+	z-index: 4;
+	top: -80px;
+	.paddingfix {
+		padding-top: 7rem;
+		@apply px-8 pb-4;
+	}
+	.gridmap {
+		background: url("../images/gridmap.svg");
+	}
+	.gridmap2 {
+		background: url("../images/gridmap2.svg");
+	}
+	text-transform: uppercase;
+	p.description {
+		text-transform: initial;
+	}
+	.bg-gray-900 {
+		color: #e5eaee;
+	}
+	.date {
+		color: var(--dark-gray);
+		i {
+			font-size: 2rem;
+		}
+	}
+	h4 {
+		color: var(--color-red);
+		@apply text-lg font-bold;
+		line-height: 2.5rem;
+	}
+	.news {
+	}
+	.calendar {
+		background: #000;
+		color: white;
+	}
+}
+
+// Article
+article {
+	padding-bottom: 20rem;
+	background: url("../images/article.png") no-repeat;
+	background-position: bottom;
+	background-size: 100%;
+	.title {
+		@apply mb-12;
+		span {
+			@apply px-8 py-4;
+			border-bottom: 1px solid var(--color-dark-gray);
+		}
+	}
+}
+
+.article_inner {
+	color: var(--color-dark-gray);
+	column-count: 2;
+	column-gap: 3rem;
+	p {
+		margin-bottom: 1rem;
+	}
+}
+
+// Team
+.team {
+	@apply pt-16;
+	background-color: black;
+	color: white;
+	.title {
+		@apply mb-12;
+		span {
+			@apply px-8 py-4;
+			border-bottom: 1px solid white;
+		}
+	}
+	.member {
+		width: 280px;
+		height: 280px;
+		background: url("https://i.pravatar.cc/300");
+		&:nth-of-type(5n) {
+			.side {
+				position: relative;
+				left: -560px;
+			}
+		}
+		.side {
+			width: 280px;
+			height: 280px;
+		}
+		&:hover {
+			z-index: 2;
+			.side {
+				background-color: black;
+			}
+		}
+	}
+}
+
+// Footer
+form {
+	button {
+		border: 2px solid black;
+	}
+}
+input,
+textarea {
+	width: 100%;
+	background-color: var(--color-light-gray);
+	padding: 0.5rem;
+	background-color: var(--color-light-gray);
+	border: 1px solid black;
+	&::placeholder {
+		color: var(--color-dark-gray);
+	}
+}
+
+.copyright {
+	font-size: 0.8rem;
+	padding: 80px 2rem 1.5rem 2rem;
+	clip-path: polygon(50% 0%, 100% 45%, 100% 100%, 0 100%, 0 45%);
+	background-color: #e5eaee;
+	.socials {
+		font-size: 2rem;
+		padding-left: 5rem;
+	}
+}
