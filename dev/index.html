@@ -7,6 +7,10 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+		<!-- AlpineJS (mobile menu) -->
+		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+		<!-- MicroModal (article & calendar modals) -->
+		<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -14,14 +18,20 @@
 			{% include "twig/header.twig" %}
 			<!-- Hero element -->
 			{% include "twig/hero.twig" %}
-			<!-- Grid layout -->
-			{% include "twig/grid.twig" %}
-			<!-- Article -->
-			{% include "twig/article.twig" %}
-			<!-- Team -->
-			{% include "twig/team.twig" %}
-			<!-- Footer -->
-			{% include "twig/footer.twig" %}
+			<div class="push">
+				<!-- Grid layout -->
+				{% include "twig/grid.twig" %}
+				<!-- Article -->
+				{% include "twig/article.twig" %}
+				<!-- Team -->
+				{% include "twig/team.twig" %}
+				<!-- Footer -->
+				{% include "twig/footer.twig" %}
+			</div>
 		</div>
+		{% include "twig/modal.twig" %}
+		<script>
+			MicroModal.init();
+		</script>
 	</body>
 </html>

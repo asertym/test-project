@@ -1,11 +1,35 @@
-<header class="w-full bg-white flex justify-between">
-	<ul class="nav flex items-center space-x-8 ml-8">
+<header class="w-full bg-red sm:bg-white flex justify-between" x-data="{open: false}">
+	<div class="flex items-center sm:hidden">
+		<!-- Mobile menu button-->
+		<button class="inline-flex items-center justify-center pl-4 text-white text-2xl" @click="open = true">
+			<!-- Icon for when menu is closed. -->
+			<svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" x-show="open == false">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+			</svg>
+			<!-- Icon for when menu is open. -->
+			<svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" x-show="open">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+			</svg>
+		</button>
+	</div>
+	<!-- Mobile menu -->
+	<ul class="hidden nav sm:flex flex-row items-center space-x-8 ml-8">
 		<li><a href="#">About Us</a></li>
 		<li><a href="#">Gallery</a></li>
 		<li><a href="#">Crew</a></li>
 		<li><a href="#">Kontakt</a></li>
 	</ul>
-	<div class="logo">
+	<!-- Desktop menu -->
+	<div class="dropdown absolute w-full bg-red text-whitebg-red text-white text-2xl" x-show="open" @click.away="open = false">
+		<div class="p-4 space-y-2">
+			<a href="#" class="block px-3 py-4">About Us</a>
+			<a href="#" class="block px-3 py-4">Gallery</a>
+			<a href="#" class="block px-3 py-4">Crew</a>
+			<a href="#" class="block px-3 py-4">Kontakt</a>
+		</div>
+	</div>
+	<!-- Right side -->
+	<div class="logo ml-auto sm:ml-0">
 		<img src="images/logo.png" alt="logo" />
 	</div>
 </header>

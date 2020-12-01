@@ -1,7 +1,10 @@
 // tailwind config
 const colors = require("tailwindcss/colors");
 module.exports = {
-	// purge: [],
+	purge: {
+		enabled: true,
+		content: ["./build/**/*.html"],
+	},
 	theme: {
 		screens: {
 			sm: "640px", // => @media (min-width: 640px) { ... }
@@ -31,6 +34,7 @@ module.exports = {
 		extend: {
 			colors: {
 				white: "#fff",
+				black: "#000",
 			},
 			gap: {
 				2: "15px",

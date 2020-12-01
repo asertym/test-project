@@ -3,6 +3,9 @@
 @import "../../node_modules/tailwindcss/utilities";
 @import "roots";
 
+body {
+	background-color: var(--color-light-gray);
+}
 h1,
 h2,
 h3,
@@ -13,7 +16,7 @@ h6 {
 }
 
 h1 {
-	@apply text-6xl;
+	@apply text-7xl font-medium;
 	color: var(--color-red);
 }
 
@@ -30,6 +33,10 @@ h5 {
 	@apply text-2xl font-bold;
 }
 
+h6 {
+	@apply text-xl font-bold;
+}
+
 .bg-light {
 	background-color: var(--color-light-gray);
 }
@@ -41,11 +48,15 @@ header {
 }
 .nav {
 	li {
-		@apply transition-colors duration-150 ease-in-out;
+		@extend .transition;
 		&:hover {
 			color: var(--color-red);
 		}
 	}
+}
+
+.dropdown {
+	top: 100%;
 }
 
 .logo {
@@ -61,35 +72,47 @@ header {
 	clip-path: polygon(50% 100%, 100% 90%, 100% 0, 0 0, 0 90%);
 	z-index: 5;
 	position: relative;
+	.hero_right {
+		p {
+			font-size: 1.5rem;
+			text-shadow: 0 0 0.8rem white;
+		}
+	}
+}
+
+.push {
+	position: relative;
+	z-index: 4;
+	top: -80px;
 }
 
 // Grid Layout
 section.grid {
-	// img {
-	// 	apply h-full;
-	// }
-	position: relative;
-	z-index: 4;
-	top: -80px;
+	text-transform: uppercase;
+	img {
+		@apply h-full w-full object-cover;
+	}
 	.paddingfix {
-		padding-top: 7rem;
+		padding-top: 7rem; // Spacing fix for top blocks
 		@apply px-8 pb-4;
 	}
 	.gridmap {
 		background: url("../images/gridmap.svg");
+		background-size: cover;
 	}
 	.gridmap2 {
 		background: url("../images/gridmap2.svg");
+		background-size: cover;
 	}
-	text-transform: uppercase;
 	p.description {
 		text-transform: initial;
 	}
 	.bg-gray-900 {
 		color: #e5eaee;
 	}
-	.date {
-		color: var(--dark-gray);
+	div.date {
+		text-transform: uppercase;
+		color: var(--color-dark-gray);
 		i {
 			font-size: 2rem;
 		}
@@ -100,17 +123,23 @@ section.grid {
 		line-height: 2.5rem;
 	}
 	.news {
+		@extend .transition;
+		background-image: url("../images/grid4.jpg");
+		background-size: cover;
+		cursor: pointer;
+		min-height: 20rem;
 	}
 	.calendar {
+		@extend .transition;
 		background: #000;
-		color: white;
+		cursor: pointer;
+		min-height: 20rem;
 	}
 }
 
 // Article
-article {
-	padding-bottom: 20rem;
-	background: url("../images/article.png") no-repeat;
+.main_article {
+	background: url("../images/article.png") no-repeat white;
 	background-position: bottom;
 	background-size: 100%;
 	.title {
@@ -127,6 +156,8 @@ article {
 	column-count: 2;
 	column-gap: 3rem;
 	p {
+		word-break: normal;
+		hyphens: auto;
 		margin-bottom: 1rem;
 	}
 }
@@ -144,23 +175,40 @@ article {
 		}
 	}
 	.member {
-		width: 280px;
-		height: 280px;
-		background: url("https://i.pravatar.cc/300");
+		@extend .transition;
+		filter: saturate(0) brightness(0.6);
 		&:nth-of-type(5n) {
 			.side {
 				position: relative;
-				left: -560px;
+				left: -200%;
 			}
 		}
 		.side {
-			width: 280px;
-			height: 280px;
+			@extend .transition;
+			color: #000;
+			min-width: 100%;
+			max-width: 280px;
+			max-height: 280px;
+			z-index: 1;
+			display: none;
+			opacity: 0;
+			position: relative;
+			overflow: hidden;
+			word-break: normal;
+			.side_inner {
+				@apply px-8 pb-8;
+				position: absolute;
+				bottom: 0;
+			}
 		}
-		&:hover {
+		&:hover,
+		&:active {
 			z-index: 2;
+			filter: none;
 			.side {
-				background-color: black;
+				opacity: 1;
+				display: block;
+				background-color: var(--color-light-gray);
 			}
 		}
 	}
@@ -169,9 +217,15 @@ article {
 // Footer
 form {
 	button {
+		@extend .transition;
 		border: 2px solid black;
+		&:hover {
+			background-color: black;
+			color: white;
+		}
 	}
 }
+
 input,
 textarea {
 	width: 100%;
@@ -184,13 +238,183 @@ textarea {
 	}
 }
 
+textarea {
+	resize: none;
+}
+
+.sponsors {
+	background-color: black;
+	color: white;
+}
+
 .copyright {
+	position: absolute;
+	bottom: -5rem;
+	width: 100%;
 	font-size: 0.8rem;
-	padding: 80px 2rem 1.5rem 2rem;
+	padding: 80px 2rem 1rem 2rem;
 	clip-path: polygon(50% 0%, 100% 45%, 100% 100%, 0 100%, 0 45%);
 	background-color: #e5eaee;
 	.socials {
 		font-size: 2rem;
 		padding-left: 5rem;
+		i {
+			@extend .transition;
+		}
 	}
+}
+
+// Media classes
+
+@media (max-width: 767px) {
+	// Clip adjust for hero and copyright blocks (triangle shape)
+	.hero {
+		clip-path: polygon(50% 100%, 100% 95%, 100% 0, 0 0, 0 95%);
+	}
+	.copyright {
+		clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0 25%);
+		padding-top: 40px;
+	}
+	.member {
+		&:nth-of-type(5n) {
+			.side {
+				left: 0 !important;
+			}
+		}
+		&:nth-of-type(3n) {
+			.side {
+				position: relative;
+				left: -200% !important;
+			}
+		}
+	}
+	.article_inner {
+		column-count: 1;
+	}
+}
+
+// Modal
+.modal_overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+}
+
+.modal_container {
+	width: 100%;
+	max-height: 90vh;
+	overflow-y: scroll;
+}
+
+#outer {
+	max-width: 1400px;
+	width: 100%;
+}
+
+.modal {
+	position: relative;
+	z-index: 10;
+	.buttons {
+		top: 0;
+		button {
+			padding: 1.4rem;
+			@apply text-2xl;
+			&#close {
+				background-color: var(--color-light-gray);
+			}
+			&#facebook,
+			&#twitter {
+				color: white;
+				background-color: black;
+			}
+		}
+	}
+	.modal_article {
+		@extend .article_inner;
+	}
+}
+
+.carousel_inner {
+	&_item {
+		@apply space-y-4;
+	}
+}
+
+.carousel_wrapper {
+	background-color: var(--color-light-gray);
+}
+
+.calendar_entry:not(:last-of-type) {
+	border-bottom: 1px solid var(--color-dark-gray);
+}
+
+// Default Modal animations
+@keyframes mmfadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes mmfadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes mmslideIn {
+	from {
+		transform: translateY(15%);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+@keyframes mmslideOut {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-10%);
+	}
+}
+
+.micromodal-slide {
+	display: none;
+}
+
+.micromodal-slide.is-open {
+	display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+	animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__container {
+	animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+	animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__container {
+	animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+	will-change: transform;
 }

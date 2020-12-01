@@ -27,6 +27,7 @@ var gulp = require('gulp'),
 		images: 'build/images/**/*'
 	};
 
+// Image min task
 gulp.task('images', () => {
 	return gulp.src(src.images)
     .pipe(imagemin({

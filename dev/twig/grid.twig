@@ -1,43 +1,53 @@
-<section class="grid grid-cols-4 grid-rows-4 grid-flow-row">
+<!-- Grid of blocks (order from left to right) -->
+<section class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-4 grid-flow-row">
+	<!-- 1 -->
 	<div class="bg-light paddingfix">
-		<p class="date">
-			<i class="far fa-calendar-alt"></i>
+		<div class="date">
+			<i class="far fa-calendar-alt mr-4"></i>
 			23 mai 2014
-		</p>
+		</div>
 		<h4>News Headline</h4>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 2 -->
 	<div class="bg-gray-900 paddingfix">
-		<p class="date">
-			<i class="far fa-calendar-alt"></i>
+		<div class="date">
+			<i class="far fa-calendar-alt mr-4"></i>
 			23 mai 2014
-		</p>
+		</div>
 		<h4>News Headline</h4>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 3 -->
 	<div class="col-span-2 gridmap paddingfix">
 		<h3 class="date">17 mai</h3>
 		<h4>Headline Beitrag 2015</h4>
 		<span>Subtitle</span>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 4 -->
 	<div class="col-span-2 row-span-2">
 		<img src="images/grid1.jpg" alt="boat" />
 	</div>
+	<!-- 5 -->
 	<div class="col-span-2 gridmap2 px-8 pb-4 pt-24">
 		<h3 class="date">17 mai</h3>
 		<h4>Headline Beitrag 2015</h4>
 		<span>Subtitle</span>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 6 -->
 	<div><img src="images/grid2.jpg" alt="boat" /></div>
+	<!-- 7 -->
 	<div><img src="images/grid3.jpg" alt="boat" /></div>
-	<div class="col-span-2 news">
-		<i class="fa fa-newspaper"></i>
-		<h3>News+Bilder</h3>
+	<!-- 8 -->
+	<div class="news col-span-2 flex justify-center items-center flex-col text-white hover:text-red" data-micromodal-trigger="modal-1">
+		<i class="fa fa-newspaper text-5xl mb-8"></i>
+		<button><h3>News+Bilder</h3></button>
 	</div>
-	<div class="flex col-span-2 calendar justify-center items-center flex-column">
-		<span class="block"><i class="far fa-calendar-alt"></i></span>
+	<!-- 9 -->
+	<div class="calendar flex col-span-2 justify-center items-center flex-col text-white hover:text-red" data-micromodal-trigger="modal-2">
+		<span class="block"><i class="far fa-calendar-alt text-5xl mb-8"></i></span>
 		<h3>Segelteam Termine 2014</h3>
 	</div>
 </section>

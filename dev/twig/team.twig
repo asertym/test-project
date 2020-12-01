@@ -3,9 +3,33 @@
 		<h2>Headline - Lorem Ipsum</h2>
 		<span class="sub">Subtitle lorem ipsum</span>
 	</div>
-	<div class="team_inner grid grid-cols-5">
-		<div class="member">
-			<div class="side">text here</div>
+	<!-- Grid starts here -->
+	<div class="team_inner grid grid-cols-3 md:grid-cols-5">
+		{% block member %}
+		<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
 		</div>
+		{% endblock member %}		
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		{{ block('member') }}
+		<!-- Grid ends here -->
 	</div>
 </section>

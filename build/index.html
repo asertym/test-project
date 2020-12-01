@@ -7,80 +7,120 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+		<!-- AlpineJS (mobile menu) -->
+		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+		<!-- MicroModal (article & calendar modals) -->
+		<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
 			<!-- Header -->
-			<header class="w-full bg-white flex justify-between">
-	<ul class="nav flex items-center space-x-8 ml-8">
+			<header class="w-full bg-red sm:bg-white flex justify-between" x-data="{open: false}">
+	<div class="flex items-center sm:hidden">
+		<!-- Mobile menu button-->
+		<button class="inline-flex items-center justify-center pl-4 text-white text-2xl" @click="open = true">
+			<!-- Icon for when menu is closed. -->
+			<svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" x-show="open == false">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+			</svg>
+			<!-- Icon for when menu is open. -->
+			<svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" x-show="open">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+			</svg>
+		</button>
+	</div>
+	<!-- Mobile menu -->
+	<ul class="hidden nav sm:flex flex-row items-center space-x-8 ml-8">
 		<li><a href="#">About Us</a></li>
 		<li><a href="#">Gallery</a></li>
 		<li><a href="#">Crew</a></li>
 		<li><a href="#">Kontakt</a></li>
 	</ul>
-	<div class="logo">
+	<!-- Desktop menu -->
+	<div class="dropdown absolute w-full bg-red text-whitebg-red text-white text-2xl" x-show="open" @click.away="open = false">
+		<div class="p-4 space-y-2">
+			<a href="#" class="block px-3 py-4">About Us</a>
+			<a href="#" class="block px-3 py-4">Gallery</a>
+			<a href="#" class="block px-3 py-4">Crew</a>
+			<a href="#" class="block px-3 py-4">Kontakt</a>
+		</div>
+	</div>
+	<!-- Right side -->
+	<div class="logo ml-auto sm:ml-0">
 		<img src="images/logo.png" alt="logo" />
 	</div>
 </header>
 			<!-- Hero element -->
-			<div class="hero grid grid-cols-2">
-	<div class="hero_left"></div>
-	<div class="hero_right pl-28 pr-12 text-center flex justify-center flex-col">
+			<!-- Hero element -->
+<div class="hero grid md:grid-cols-2">
+	<div class="hero_left hidden md:block"></div>
+	<div class="hero_right px-12 md:pl-28 md:pr-12 text-center flex justify-center flex-col">
 		<h1>Lorem ipsum proin gravi</h1>
 		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic provident quo.</p>
 	</div>
 </div>
-			<!-- Grid layout -->
-			<section class="grid grid-cols-4 grid-rows-4 grid-flow-row">
+			<div class="push">
+				<!-- Grid layout -->
+				<!-- Grid of blocks (order from left to right) -->
+<section class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-4 grid-flow-row">
+	<!-- 1 -->
 	<div class="bg-light paddingfix">
-		<p class="date">
-			<i class="far fa-calendar-alt"></i>
+		<div class="date">
+			<i class="far fa-calendar-alt mr-4"></i>
 			23 mai 2014
-		</p>
+		</div>
 		<h4>News Headline</h4>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 2 -->
 	<div class="bg-gray-900 paddingfix">
-		<p class="date">
-			<i class="far fa-calendar-alt"></i>
+		<div class="date">
+			<i class="far fa-calendar-alt mr-4"></i>
 			23 mai 2014
-		</p>
+		</div>
 		<h4>News Headline</h4>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 3 -->
 	<div class="col-span-2 gridmap paddingfix">
 		<h3 class="date">17 mai</h3>
 		<h4>Headline Beitrag 2015</h4>
 		<span>Subtitle</span>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 4 -->
 	<div class="col-span-2 row-span-2">
 		<img src="images/grid1.jpg" alt="boat" />
 	</div>
+	<!-- 5 -->
 	<div class="col-span-2 gridmap2 px-8 pb-4 pt-24">
 		<h3 class="date">17 mai</h3>
 		<h4>Headline Beitrag 2015</h4>
 		<span>Subtitle</span>
 		<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe est alias a, mollitia hic.</p>
 	</div>
+	<!-- 6 -->
 	<div><img src="images/grid2.jpg" alt="boat" /></div>
+	<!-- 7 -->
 	<div><img src="images/grid3.jpg" alt="boat" /></div>
-	<div class="col-span-2 news">
-		<i class="fa fa-newspaper"></i>
-		<h3>News+Bilder</h3>
+	<!-- 8 -->
+	<div class="news col-span-2 flex justify-center items-center flex-col text-white hover:text-red" data-micromodal-trigger="modal-1">
+		<i class="fa fa-newspaper text-5xl mb-8"></i>
+		<button><h3>News+Bilder</h3></button>
 	</div>
-	<div class="flex col-span-2 calendar justify-center items-center flex-column">
-		<span class="block"><i class="far fa-calendar-alt"></i></span>
+	<!-- 9 -->
+	<div class="calendar flex col-span-2 justify-center items-center flex-col text-white hover:text-red" data-micromodal-trigger="modal-2">
+		<span class="block"><i class="far fa-calendar-alt text-5xl mb-8"></i></span>
 		<h3>Segelteam Termine 2014</h3>
 	</div>
 </section>
-			<!-- Article -->
-			<article>
+				<!-- Article -->
+				<article class="main_article pt-24 pb-48 md:pb-80">
 	<div class="title text-center">
 		<h2>Headline - Lorem Ipsum</h2>
 		<span class="sub">Subtitle lorem ipsum</span>
 	</div>
-	<div class="article_inner">
+	<div class="article_inner px-8 md:px-24 lg:px-48">
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 		<p>
 			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
@@ -93,22 +133,171 @@
 		<p>sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
 	</div>
 </article>
-			<!-- Team -->
-			<section class="team">
+				<!-- Team -->
+				<section class="team">
 	<div class="title text-center">
 		<h2>Headline - Lorem Ipsum</h2>
 		<span class="sub">Subtitle lorem ipsum</span>
 	</div>
-	<div class="team_inner grid grid-cols-5">
-		<div class="member">
-			<div class="side">text here</div>
+	<!-- Grid starts here -->
+	<div class="team_inner grid grid-cols-3 md:grid-cols-5">
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
 		</div>
+				
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+				<div class="member flex flex-row flex-nowrap">
+			<img src="images/member.jpg" alt="member" />
+			<div class="side">
+				<div class="side_inner">
+					<h6>John Doe</h4>
+					<p>Lorem ipsum dolr sit amet, consecteur adipscing elit.</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Grid ends here -->
 	</div>
 </section>
-			<!-- Footer -->
-			<footer class="bg-white">
+				<!-- Footer -->
+				<footer class="bg-white relative">
 	<div class="footer-container grid grid-cols-2">
-		<div class="contact p-24">
+		<div class="contact p-12 md:p-24">
 			<h3>kontakt</h3>
 			<span class="sub">formular</span>
 			<form class="space-y-4" action="">
@@ -118,7 +307,7 @@
 				<button class="uppercase px-4 py-2">Absenden</button>
 			</form>
 		</div>
-		<div class="sponsors p-24">
+		<div class="sponsors grid grid-cols-2 p-12 md:p-24">
 			<img src="images/sponsor1.png" alt="Sponsor 1 logo" />
 			<img src="images/sponsor2.png" alt="Sponsor 2 logo" />
 			<img src="images/sponsor3.png" alt="Sponsor 3 logo" />
@@ -129,8 +318,8 @@
 	<div class="copyright flex justify-center items-center">
 		<p>&copy; 2014. Segel Team. All rights reserved.</p>
 		<div class="socials mx-auto space-x-4">
-			<i class="fab fa-twitter"></i>
-			<i class="fab fa-facebook-f"></i>
+			<i class="fab fa-twitter hover:text-red"></i>
+			<i class="fab fa-facebook-f hover:text-red"></i>
 		</div>
 		<ul class="copy_nav space-x-4 flex">
 			<li>Impressum</li>
@@ -140,6 +329,147 @@
 		</ul>
 	</div>
 </footer>
+			</div>
 		</div>
+		<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+	<div class="modal_overlay" tabindex="-1" data-micromodal-close>
+		<div id="outer" class="flex">
+			<div class="modal_container relative" role="dialog" aria-modal="true">
+				<div class="modal_inner bg-white relative mx-auto pt-16">
+					<article class="modal_article mx-auto px-24 pb-12">
+						<div class="article_header text-black">
+							<div class="date"><i class="far fa-calendar-alt mr-4"></i> 23 mai 2014</div>
+							<div class="mb-12">
+								<h2>Newsartikel headline</h2>
+								<h4>lorem ipsum proin gravida nibh vel velit</h4>
+								<hr />
+							</div>
+						</div>
+						<div>
+							<p>
+								Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in
+								erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.
+							</p>
+							<p>
+								Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in
+								erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim. Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
+							</p>
+							<p>Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit.</p>
+							<p>
+								Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in
+								erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim. Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit
+								amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostr.
+							</p>
+							<img src="images/grid1.jpg" alt="boat" />
+						</div>
+					</article>
+					<div class="carousel_wrapper py-12">
+						<div class="carousel mx-auto px-12">
+							<h4>Ältere Artikel</h4>
+							<div class="carousel_inner flex space-x-8">
+								<div class="carousel_inner_item">
+									<img src="images/grid2.jpg" alt="article" />
+									<h5>Headline von einem alteren artikel</h5>
+									<p>lLorem ipsum dolr sit amet consecteur adipiscng elit. Saep st alias a, mollita hic provident quo impedit illum assumenda tempore facer optio harum enim accusamus, incidunt ex voluptaum evniet corporis?</p>
+								</div>
+								<div class="carousel_inner_item">
+									<img src="images/grid2.jpg" alt="article" />
+									<h5>Headline von einem alteren artikel</h5>
+									<p>lLorem ipsum dolr sit amet consecteur adipiscng elit. Saep st alias a, mollita hic provident quo impedit illum assumenda tempore facer optio harum enim accusamus, incidunt ex voluptaum evniet corporis?</p>
+								</div>
+								<div class="carousel_inner_item">
+									<img src="images/grid2.jpg" alt="article" />
+									<h5>Headline von einem alteren artikel</h5>
+									<p>lLorem ipsum dolr sit amet consecteur adipiscng elit. Saep st alias a, mollita hic provident quo impedit illum assumenda tempore facer optio harum enim accusamus, incidunt ex voluptaum evniet corporis?</p>
+								</div>
+								<div class="carousel_inner_item">
+									<img src="images/grid2.jpg" alt="article" />
+									<h5>Headline von einem alteren artikel</h5>
+									<p>lLorem ipsum dolr sit amet consecteur adipiscng elit. Saep st alias a, mollita hic provident quo impedit illum assumenda tempore facer optio harum enim accusamus, incidunt ex voluptaum evniet corporis?</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="buttons flex flex-col">
+				<button id="close" aria-label="Close modal" data-micromodal-close>
+					<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+				<button id="facebook"><i class="fab fa-twitter hover:text-red"></i></button>
+				<button id="twitter"><i class="fab fa-facebook-f hover:text-red"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+	<div class="modal_overlay" tabindex="-1" data-micromodal-close>
+		<div id="outer" class="flex">
+			<div class="modal_container relative" role="dialog" aria-modal="true">
+				<div class="modal_inner bg-white relative mx-auto pt-16">
+					<article class="mx-auto px-24 pb-12">
+						<div class="article_header text-black">
+							<div class="mb-12">
+								<h2>Newsartikel headline</h2>
+								<h4>lorem ipsum proin gravida nibh vel velit</h4>
+								<hr />
+							</div>
+						</div>
+						<div class="calendar">
+														<div class="calendar_entry py-8 w-full flex justify-between">
+								<div class="cal_date"><i class="far fa-calendar-alt mr-8"></i>23-24 mai 2021</div>
+								<div class="cal_desc">Lorem ipsum dolor sit amet</div>
+								<div class="cal_place">Mondsee</div>
+								<div class="cal_perm">Alle Klassen</div>
+							</div>
+																					<div class="calendar_entry py-8 w-full flex justify-between">
+								<div class="cal_date"><i class="far fa-calendar-alt mr-8"></i>23-24 mai 2021</div>
+								<div class="cal_desc">Lorem ipsum dolor sit amet</div>
+								<div class="cal_place">Mondsee</div>
+								<div class="cal_perm">Alle Klassen</div>
+							</div>
+							
+														<div class="calendar_entry py-8 w-full flex justify-between">
+								<div class="cal_date"><i class="far fa-calendar-alt mr-8"></i>23-24 mai 2021</div>
+								<div class="cal_desc">Lorem ipsum dolor sit amet</div>
+								<div class="cal_place">Mondsee</div>
+								<div class="cal_perm">Alle Klassen</div>
+							</div>
+							
+														<div class="calendar_entry py-8 w-full flex justify-between">
+								<div class="cal_date"><i class="far fa-calendar-alt mr-8"></i>23-24 mai 2021</div>
+								<div class="cal_desc">Lorem ipsum dolor sit amet</div>
+								<div class="cal_place">Mondsee</div>
+								<div class="cal_perm">Alle Klassen</div>
+							</div>
+							
+														<div class="calendar_entry py-8 w-full flex justify-between">
+								<div class="cal_date"><i class="far fa-calendar-alt mr-8"></i>23-24 mai 2021</div>
+								<div class="cal_desc">Lorem ipsum dolor sit amet</div>
+								<div class="cal_place">Mondsee</div>
+								<div class="cal_perm">Alle Klassen</div>
+							</div>
+							
+						</div>
+					</article>
+				</div>
+			</div>
+			<div class="buttons flex flex-col">
+				<button id="close" aria-label="Close modal" data-micromodal-close>
+					<svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+				<button id="facebook"><i class="fab fa-twitter hover:text-red"></i></button>
+				<button id="twitter"><i class="fab fa-facebook-f hover:text-red"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+		<script>
+			MicroModal.init();
+		</script>
 	</body>
 </html>
